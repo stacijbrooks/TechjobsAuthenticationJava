@@ -3,7 +3,10 @@ package org.launchcode.techjobsauth.controllers;
 import jakarta.servlet.http.HttpSession;
 import org.launchcode.techjobsauth.models.User;
 import org.launchcode.techjobsauth.models.data.UserRepository;
+import org.launchcode.techjobsauth.models.dto.RegistrationFormDTO;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Optional;
 
@@ -20,7 +23,7 @@ public class AuthenticationController {
 
     public User getUserFromSession(HttpSession session) {
         Integer userId = (Integer) session.getAttribute(userSessionKey);
-        if (userId = null) {
+        if (userId != null) {
             return null;
         }
 
@@ -34,7 +37,11 @@ public class AuthenticationController {
     }
 
     //Handlers
-
+    @GetMapping("/register")
+    public String displayRegistrationForm(Model model) {
+        model.addAttribute(new RegistrationFormDTO());
+        return "register";
+    }
 
 }
 
